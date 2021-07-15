@@ -45,8 +45,11 @@ describe('UsersController (e2e)', () => {
   it('/users/signin (POST)', () => {
     return request(app.getHttpServer())
       .post('/users/signin')
-
-      .expect(1);
+      .send({
+        email: 'minhdoan2@gmail.com',
+        password: 'hsu321',
+      })
+      .expect(201);
     //   .expect((response) => {
     //     console.log(response.body);
     //   });

@@ -1,7 +1,6 @@
-import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { UserService } from '../shared/user.service';
 import { LoginDTO, RegisterDTO } from './auth.dto';
-import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 
 @Controller('auth')
@@ -12,7 +11,7 @@ export class AuthController {
   ) {}
 
   @Get()
-  @UseGuards(AuthGuard('jwt'))
+  // @UseGuards(AuthGuard('jwt'))
   tempAuth() {
     return { auth: 'works' };
   }
@@ -25,7 +24,7 @@ export class AuthController {
     };
 
     const token = await this.authService.signPayload(payload);
-    return { user, token };
+    return { user, token, isLogined: true };
   }
 
   @Post('register')
@@ -34,7 +33,7 @@ export class AuthController {
     const payload = {
       email: user.email,
     };
-    const token = await this.authService.signPayload(payload);
-    return { user, token };
+    // const token = await this.authService.signPayload(payload);
+    return { user };
   }
 }

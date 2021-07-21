@@ -32,7 +32,13 @@ export class UserService {
     }
 
     if (await bcrypt.compare(password, user.password)) {
-      return this.sanitizeUser(user);
+      if (user._id) {
+        const { _id, email } = user;
+        return {
+          email,
+          _id,
+        };
+      }
     } else {
       throw new HttpException('Invalid login', HttpStatus.UNAUTHORIZED);
     }

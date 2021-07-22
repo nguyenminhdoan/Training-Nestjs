@@ -1,8 +1,8 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { UserService } from '../shared/user.service';
 import { LoginDTO, RegisterDTO } from './auth.dto';
 import { AuthService } from './auth.service';
-
+import { JWTAuthGuard } from './jwt-auth.guard';
 @Controller('auth')
 export class AuthController {
   constructor(
@@ -11,7 +11,7 @@ export class AuthController {
   ) {}
 
   @Get()
-  // @UseGuards(AuthGuard('jwt'))
+  @UseGuards(JWTAuthGuard)
   tempAuth() {
     return { auth: 'works' };
   }

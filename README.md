@@ -71,3 +71,13 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+## Config to use
+
+We use MongoDB for database so please following the config below to use
+
+in app.module file change path
+MongooseModule.forRoot('mongodb://your host mongo/name')
+
+in app.e2e-spec file change path
+mongoose.connect('mongodb://your host mongo/name')

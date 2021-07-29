@@ -81,3 +81,33 @@ MongooseModule.forRoot('mongodb://your host mongo/name')
 
 in app.e2e-spec file change path
 mongoose.connect('mongodb://your host mongo/name')
+
+## set up Docker
+
+# Run in Docker
+
+docker-compose up
+
+# use -d flag to run in background
+
+# Tear down
+
+docker-compose down
+
+# To re-build
+
+docker-compose build
+
+## Vagrant set up
+
+## Init vagrant
+
+vagrant up
+
+## Update vagrant file
+
+vagrant reload
+
+## control vagrant from host
+
+vagrant ssh

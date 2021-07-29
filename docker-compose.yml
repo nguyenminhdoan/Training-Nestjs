@@ -3,10 +3,17 @@ version: '3.7'
 services:
   mongo:
     image: mongo
+    restart: always
+    restart: on-failure
+    restart: unless-stopped
     ports:
-      - 27017:27017
+      - 27018:27017
     volumes:
       - mongodb:/data/db
+  web:
+    image: nginx
+    ports:
+      - '8080:80'
 
 volumes:
   mongodb:

@@ -1,16 +1,13 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import config from './config/typeorm.config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
-import { MongooseModule } from '@nestjs/mongoose';
 import { SharedModule } from './shared/shared.module';
 
 @Module({
-  imports: [
-    AuthModule,
-    MongooseModule.forRoot('mongodb://localhost:27017/nestjs'),
-    SharedModule,
-  ],
+  imports: [AuthModule, TypeOrmModule.forRoot(config), SharedModule],
   controllers: [AppController],
   providers: [AppService],
 })

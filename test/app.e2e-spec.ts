@@ -39,7 +39,7 @@ describe('AUTH', () => {
       .send(user)
       .expect(({ body }) => {
         console.log(body);
-        expect(body.token).toBeDefined();
+        expect(body.token).toBeUndefined();
         expect(body.user.email).toEqual('minhdoan3@gmail.com');
         expect(body.user.password).toBeDefined();
       })
@@ -67,7 +67,7 @@ describe('AUTH', () => {
         userToken = body.token;
         expect(body.token).toBeDefined();
         expect(body.user.email).toEqual('minhdoan3@gmail.com');
-        expect(body.user.password).toBeDefined();
+        expect(body.user.password).toBeUndefined();
       })
       .expect(HttpStatus.CREATED);
   });

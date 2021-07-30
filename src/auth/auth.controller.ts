@@ -10,11 +10,11 @@ export class AuthController {
     private readonly authService: AuthService,
   ) {}
 
-  @Get()
-  @UseGuards(JWTAuthGuard)
-  tempAuth() {
-    return { auth: 'works' };
-  }
+  // @Get()
+  // @UseGuards(JWTAuthGuard)
+  // tempAuth() {
+  //   return { auth: 'works' };
+  // }
 
   @Post('login')
   async login(@Body() userDTO: LoginDTO) {
@@ -35,5 +35,11 @@ export class AuthController {
     };
     // const token = await this.authService.signPayload(payload);
     return { user };
+  }
+
+  @Get('test')
+  async create() {
+    // return this.userService.createUser('doan', '123');
+    return 123;
   }
 }

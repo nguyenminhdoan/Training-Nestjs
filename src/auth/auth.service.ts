@@ -2,12 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { UserService } from '../shared/user.service';
 import { sign } from 'jsonwebtoken';
 
-// export type User = {
-//   id: number;
-//   name: string;
-//   email: string;
-//   password: string;
-// };
+
 @Injectable()
 export class AuthService {
   constructor(private userService: UserService) {}

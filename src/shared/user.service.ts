@@ -12,18 +12,27 @@ export class UserService {
   ) {}
 
   async create(userDTO: RegisterDTO) {
-    const { email } = userDTO;
-    const user = await this.userRepository.findOne({ email });
-    if (user) {
-      throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
-    }
-    const createdUser = await this.userRepository.save(userDTO);
+    try {
+      const { email } = userDTO;
+      const user = await this.userRepository.findOne({ email });
+      if (user) {
+        throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
+      }
 
-    return createdUser;
+      const newUser = await this.userRepository.create(userDTO);
+      return this.userRepository.save(newUser);
+    } catch (error) {
+      console.log(error.message);
+    }
   }
+
+  // async findOne(email) {
+  //   return this.userRepository.findOneOrFail(email);
+  // }
 
   async findByLogin(userDTO: LoginDTO) {
     const { email, password } = userDTO;
+    console.log(email, password);
     const user = await this.userRepository.findOne({ email });
     if (!user) {
       throw new HttpException('Invalid login', HttpStatus.UNAUTHORIZED);
@@ -47,9 +56,9 @@ export class UserService {
     return await this.userRepository.findOne({ email });
   }
 
-  createUser(email: string, password: string) {
-    console.log(name);
-    const newUser = this.userRepository.create({ password, email });
-    return this.userRepository.save(newUser);
-  }
+  // createUser(email: string, password: string) {
+  //   console.log(name);
+  //   const newUser = this.userRepository.create({ password, email });
+  //   return this.userRepository.save(newUser);
+  // }
 }

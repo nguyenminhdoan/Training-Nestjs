@@ -9,7 +9,7 @@ import { User } from 'src/user.entity';
 
 @Module({
   providers: [AuthService, JwtStrategy],
-  imports: [PassportModule, SharedModule],
+  imports: [PassportModule, SharedModule, TypeOrmModule.forFeature([User])],
   controllers: [AuthController],
 })
 export class AuthModule {}

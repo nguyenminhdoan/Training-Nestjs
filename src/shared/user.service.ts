@@ -16,13 +16,13 @@ export class UserService {
       const { email } = userDTO;
       const user = await this.userRepository.findOne({ email });
       if (user) {
-        throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
+        return new HttpException('User already exists', HttpStatus.BAD_REQUEST);
       }
 
       const newUser = await this.userRepository.create(userDTO);
       return this.userRepository.save(newUser);
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
     }
   }
 
@@ -32,7 +32,6 @@ export class UserService {
 
   async findByLogin(userDTO: LoginDTO) {
     const { email, password } = userDTO;
-    console.log(email, password);
     const user = await this.userRepository.findOne({ email });
     if (!user) {
       throw new HttpException('Invalid login', HttpStatus.UNAUTHORIZED);

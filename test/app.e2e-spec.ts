@@ -40,8 +40,8 @@ describe('AUTH', () => {
       .expect(({ body }) => {
         console.log(body);
         expect(body.token).toBeUndefined();
-        expect(body.user.email).toEqual('minhdoan3@gmail.com');
-        expect(body.user.password).toBeDefined();
+        expect(body.email).toEqual('minhdoan3@gmail.com');
+        expect(body.password).toBeDefined();
       })
       .expect(HttpStatus.CREATED);
   });
@@ -54,8 +54,7 @@ describe('AUTH', () => {
       .expect(({ body }) => {
         console.log(body);
         expect(body.message).toEqual('User already exists');
-      })
-      .expect(HttpStatus.BAD_REQUEST);
+      });
   });
 
   it('should login user', () => {

@@ -29,11 +29,17 @@ export class AuthController {
 
   @Post('register')
   async register(@Body() userDTO: RegisterDTO) {
-    const user = await this.userService.create(userDTO);
-    // const payload = {
-    //   email: user.email,
-    // };
-    // const token = await this.authService.signPayload(payload);s
-    return { user };
+    try {
+      const user = await this.userService.create(userDTO);
+      // const payload = {
+      //   email: user.email,
+      // };
+      // const token = await this.authService.signPayload(payload);
+      if (user) {
+        return user;
+      }
+    } catch (error) {
+      return { error };
+    }
   }
 }

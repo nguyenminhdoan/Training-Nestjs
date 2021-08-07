@@ -1,14 +1,18 @@
+import { Inject, forwardRef } from '@nestjs/common';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
 import { LoginDTO, RegisterDTO } from '../auth/auth.dto';
 import { User } from '../user.entity';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class UserService {
   constructor(
-    @InjectRepository(User) private userRepository: Repository<User>,
+    // @Inject(forwardRef(() => AuthService))
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
   ) {}
 
   async create(userDTO: RegisterDTO) {
@@ -22,7 +26,7 @@ export class UserService {
       const newUser = await this.userRepository.create(userDTO);
       return this.userRepository.save(newUser);
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   }
 
